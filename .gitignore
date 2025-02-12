@@ -1,0 +1,63 @@
+# Dependency directories
+node_modules/
+
+# Ignore operating system and editor-specific files
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.swo
+
+# Ignore compiled files and build/distribution directories
+/dist/
+/build/
+
+# Ignore TypeScript declaration files (if you're not committing them)
+*.d.ts
+
+# Ignore log files, cache, and temporary files
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/tmp
+/temp
+**/cache/
+
+# Ignore sensitive data
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Ignore IDE and editor config files
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore JetBrains project files
+*.iml
+.idea/
+*.iws
+*.ipr
+
+# Ignore the npm/yarn internal files
+package-lock.json
+yarn.lock
+
+# Ignore coverage directory created by tools like nyc
+/coverage/
+
+# Additional directories or files to ignore
+/.pnp
+.pnp.js
+
+# Debug log from npm
+npm-debug.log*
+
+# Ignore production/distribution files if source is different
+/public/
+
+# Environment local override
+.local
