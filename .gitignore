@@ -61,3 +61,13 @@ npm-debug.log*
 
 # Environment local override
 .local
+
+# ---
+
+# Debugging
+reply.txt
+email.json
+
+# Input files with personal info
+prompt.txt
+signature.txt

@@ -1,12 +1,12 @@
 {
-  "name": "boil-node",
+  "name": "write-email-draft",
   "version": "0.2.0",
-  "description": "A dead simple boilerplate for Node.js projects.",
-  "main": "main.js",
+  "description": "Looks for unread emails in an IMAP inbox and drafts a reply using ai.",
+  "main": "app.js",
   "scripts": {
-    "start": "ts-node ./src/main.ts",
+    "start": "ts-node ./src/app.ts",
     "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only ./src/main.ts"
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts"
   },
   "license": "",
   "devDependencies": {
@@ -21,6 +21,10 @@
     ]
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "@ai-sdk/openai": "^1.1.9",
+    "ai": "^4.1.34",
+    "dotenv": "^16.4.7",
+    "imap": "^0.8.19",
+    "mailparser": "^3.7.2"
   }
 }

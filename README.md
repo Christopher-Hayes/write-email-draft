@@ -1,49 +1,65 @@
-## Setup
+# Email Draft Generator with AI Integration
 
-**One-liner:** Create private repo. Clone it. Install deps. Open VS Code.
+This project uses the IMAP protocol to fetch unread emails from a specified folder, parse their content, and generate AI-powered draft responses. It then stores the drafts in the "Drafts" folder of the mailbox.
+
+## Features
+
+- Fetch unread emails from a specified IMAP inbox folder.
+- Parse email bodies using the `mailparser` library.
+- Generate email drafts using OpenAI's API (`generateText`).
+- Append AI-generated drafts to the "Drafts" folder in your IMAP server.
+- Handle email formatting (e.g., clean HTML, unicode characters).
+- Add custom signature to generated drafts.
+
+## Requirements
+
+- Node.js
+- IMAP server credentials
+- OpenAI API key (for text generation)
+- dotenv library for environment variables
+
+## Installation
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root of your project with the following variables. You can use the `.env.example` file as a template.
+
+   ```env
+   OPENAI_MODEL=your_openai_model (e.g., gpt-4o)
+
+   IMAP_USER=your_imap_username
+   IMAP_PASSWORD=your_imap_password
+   IMAP_HOST=your_imap_host (e.g., imap.gmail.com)
+   IMAP_PORT=your_imap_port (e.g., 993 for SSL)
+   INBOX_FOLDER=your_inbox_folder (leave blank for entire INBOX, use "Folders/Important" for a folder named "Important")
+   ```
+
+4. Add the context and signature text files:
+   - `prompt.txt` – Contains the AI prompt context. You can copy the content from the `prompt.example.txt` file.
+   - `signature.txt` – Contains your signature that will be appended to the generated drafts. You can copy the content from the `signature.example.txt` file.
+
+## Usage
+
+Run the script to start fetching unread emails, generating drafts, and appending them to the "Drafts" folder:
 
 ```bash
-PROJECT_NAME='boil-node' # Repo will be named "boil-node" unless you change this.
-gh repo create --private --clone --template Christopher-Hayes/boil-node "$PROJECT_NAME" && cd "$PROJECT_NAME" && yarn && code .
+npm run start
 ```
 
-*For other IDEs replace `code .`*
+### Workflow
 
-## Start
+1. **IMAP Connection**: Connects to the IMAP server using the credentials from the `.env` file.
+2. **Fetch Unseen Emails**: Searches for all unread emails from the last 7 days in the specified folder.
+3. **Parse Email Content**: Uses the `mailparser` library to parse email bodies (HTML or plain text).
+4. **Generate AI Draft**: Sends the parsed email body to OpenAI's API to generate a draft response.
+5. **Append Draft**: Saves the generated draft to the "Drafts" folder in the mailbox.
 
-Run your code once.
+## Notes
 
-```bash
-yarn start
-```
-
-## Dev
-
-Your code will rerun when files change.
-
-```bash
-yarn dev
-```
-
-# boil-node
-
-A template repo for simple Node.js projects.
-
-Primarly focused on prototyping with Node.JS where the tools should not get in the way.
-
-## Goals with this template
-
-I use Node.JS a lot for small internal tools. Typescript is a must-have when working with data, and it's hassle remembering how to set it up each time to use modern JS features. Popular GitHub Node.JS templates try to be too helpful, and slow down dev.
-
-**This template has..**
-
-- `YES` Supports modern JS features
-- `YES` Typescript should just work
-- `YES` JS is allowed too, typescript is not forced
-
-**This template does not include..**
-
-- `NO` Aggressive linting
-- `NO` Git hooks, vscode settings, or other annoying defaults
-- `NO` Testing, just building
-- `NO` Messing with tsc build config
+- The script doesn't mark emails as "seen" and won't change the state of the original emails.
+- By default, it fetches emails from the last 7 days. You can adjust this in the `searchCriteria` variable.
+- Ensure you have sufficient permissions to append messages to the "Drafts" folder.

@@ -1,0 +1,5 @@
+NAME,
+
+www - [WEBSITE]
+email - [EMAIL]
+toots - [MASTODON]
